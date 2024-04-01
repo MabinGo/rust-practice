@@ -1,5 +1,5 @@
 pub fn test_pattern() {
-    test_iflet1();
+    test_match7();
     // test_match6();
     // test_match5();
     // test_match4();
@@ -8,7 +8,7 @@ pub fn test_pattern() {
     // test_match1();
 }
 
-fn test_iflet1() {
+fn test_match7() {
     let value = Some(2u8);
     if let Some(2) = value {
         println!("Second");
