@@ -14,8 +14,10 @@ mod borrowing;
 mod basetype;
 mod print;
 mod pattern;
+mod option;
 
 fn main() {
+    // option::test_option();
     pattern::test_pattern();
     // procctrl::test_procctrl();
     // array::test_array();
