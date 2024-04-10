@@ -1,5 +1,9 @@
 pub fn test_pattern() {
-    test_match18();//解构结构体和元组
+    test_match22();// 绑定
+    // test_match21();//匹配守卫提供的额外条件
+    // test_match20();//用 .. 忽略剩余值
+    // test_match19();//_ 忽略部分值
+    // test_match18();//解构结构体和元组
     // test_match17();//解构嵌套的结构体和枚举
     // test_match16();//解构枚举
     // test_match15();//解构结构体
@@ -19,8 +23,98 @@ pub fn test_pattern() {
     // test_match1();
 }
 
+enum MessageBinding {
+    Hello { id: u32 }
+}
+
+fn test_match22() {
+    let msg = MessageBinding::Hello { id: 5 };
+
+    match msg {
+        MessageBinding::Hello { id: id_variable @ 3..=7 } => { println!("Found an id in range: {}", id_variable) }
+        MessageBinding::Hello { id: 10..=12 } => { println!("Found an id in another range") }
+        MessageBinding::Hello { id } => { println!("Found some other id: {}", id) }
+    }
+
+    // 绑定新变量 `p`，同时对 `Point` 进行解构
+    let p @ Point { x: px, y: py } = Point { x: 10, y: 23 };
+    println!("x: {}, y: {}", px, py);
+    println!("{:?}", p);
+
+    let point = Point { x: 10, y: 5 };
+    if let p @ Point { x: 10, y } = point {
+        println!("x is 10 and y is {} in {:?}", y, p);
+    }
+
+    // num 要绑定到所有的模式上 (1 | 2)，否则报错
+    match 1 {
+        num @ (1 | 2) => { println!("{}", num); }
+        _ => {}
+    }
+}
+
+fn test_match21() {
+    let x = Some(5);
+    let y = 10;
+    match x {
+        Some(50) => println!("Got 50"),
+        Some(n) if n == y => println!("Matched, n = {}", n),
+        _ => println!("Default case, x = {:?}", x),
+    }
+    println!("at the end: x = {:?}, y = {}", x, y);
+
+    let x = 4;
+    let y = false;
+    match x {
+        4 | 5 | 6 if y => println!("yes"),
+        _ => println!("no"),
+    }
+}
+
+fn test_match20() {
+    let t = (1, 2, 3, 4, 5);
+
+    match t {
+        (first, .., fifth) => { println!("first={},fifth={}", first, fifth); }
+    }
+
+    /* 下面的写法是错的，首先每个元组模式只能有一个..，其次不知道second该匹配哪个numbers
+    let numbers = (2, 4, 8, 16, 32);
+    match numbers {
+        (.., second, ..) => {
+            println!("Some numbers: {}", second)
+        },
+    }
+    */
+}
+
+fn test_match19() {
+    // 可以在一个模式内部使用 _ 忽略部分值
+    let mut setting_value = Some(5);
+    let new_setting_value = Some(10);
+
+    match (setting_value, new_setting_value.clone()) {
+        (Some(_), Some(_)) => { println!("Can't overwrite an existing customized value"); }
+        _ => { setting_value = new_setting_value; }
+    }
+    println!("setting is {:?}", setting_value);
+
+    // 在一个模式中的多处使用下划线来忽略特定值
+    let numbers = (2, 4, 8, 16, 32);
+    match numbers {
+        (first, _, third, _, fifth) => { println!("Some numbers: {}, {}, {}", first, third, fifth) }
+    }
+
+    // _s 仍会将值绑定到变量，而 _ 则完全不会绑定
+    let s = Some(2); //如果是非基础类型，比如String::from("Hello!") ，则会发生转移，编不过
+    if let Some(_s) = s {
+        println!("found a string");
+    }
+    println!("{:?}", s);
+}
+
 fn test_match18() {
-    let ((feet, inches), Point {x, y}) = ((8, 9), Point { x: 1, y: 2 });
+    let ((feet, inches), Point { x, y }) = ((8, 9), Point { x: 1, y: 2 });
 
     //定长数组
     let arr: [u16; 2] = [0, 1];
@@ -91,6 +185,7 @@ fn test_match16() {
     }
 }
 
+#[derive(Debug)]
 struct Point {
     x: i32,
     y: i32,

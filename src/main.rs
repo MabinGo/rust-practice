@@ -15,10 +15,12 @@ mod basetype;
 mod print;
 mod pattern;
 mod option;
+mod method;
 
 fn main() {
+    method::test_method();
     // option::test_option();
-    pattern::test_pattern();
+    // pattern::test_pattern();
     // procctrl::test_procctrl();
     // array::test_array();
     // enumeration::test_enumeration();
