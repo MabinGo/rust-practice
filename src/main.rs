@@ -16,9 +16,11 @@ mod print;
 mod pattern;
 mod option;
 mod method;
+mod generics;
 
 fn main() {
-    method::test_method();
+    generics::test_generics();
+    // method::test_method();
     // option::test_option();
     // pattern::test_pattern();
     // procctrl::test_procctrl();

@@ -1,7 +1,7 @@
 pub fn test_method() {
     test_memthod3(); // 定义枚举的方法
-    // test_memthod2(); // 方法名跟结构体的字段名相同
-    // test_memthod1(); //自处理方法、关联函数定义和调用
+    test_memthod2(); // 方法名跟结构体的字段名相同
+    test_memthod1(); //自处理方法、关联函数定义和调用
 }
 
 #[allow(unused)]

@@ -1,7 +1,7 @@
 pub fn test_opstring() {
-    // test_opstring4();
-    // test_opstring3();
-    // test_opstring2();
+    test_opstring4();
+    test_opstring3();
+    test_opstring2();
     test_opstring1();
 }
 

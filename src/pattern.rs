@@ -1,26 +1,26 @@
 pub fn test_pattern() {
     test_match22();// 绑定
-    // test_match21();//匹配守卫提供的额外条件
-    // test_match20();//用 .. 忽略剩余值
-    // test_match19();//_ 忽略部分值
-    // test_match18();//解构结构体和元组
-    // test_match17();//解构嵌套的结构体和枚举
-    // test_match16();//解构枚举
-    // test_match15();//解构结构体
-    // test_match14();//通过序列 ..= 匹配值的范围
-    // test_match13();//单分支多模式
-    // test_match12();//匹配命名变量
-    // test_match11();
-    // test_match10();
-    // test_match9();
-    // test_match8();
-    // test_match7();
-    // test_match6();
-    // test_match5();
-    // test_match4();
-    // test_match3();
-    // test_match2();
-    // test_match1();
+    test_match21();//匹配守卫提供的额外条件
+    test_match20();//用 .. 忽略剩余值
+    test_match19();//_ 忽略部分值
+    test_match18();//解构结构体和元组
+    test_match17();//解构嵌套的结构体和枚举
+    test_match16();//解构枚举
+    test_match15();//解构结构体
+    test_match14();//通过序列 ..= 匹配值的范围
+    test_match13();//单分支多模式
+    test_match12();//匹配命名变量
+    test_match11();
+    test_match10();
+    test_match9();
+    test_match8();
+    test_match7();
+    test_match6();
+    test_match5();
+    test_match4();
+    test_match3();
+    test_match2();
+    test_match1();
 }
 
 enum MessageBinding {
